@@ -1,0 +1,24 @@
+{
+  "entryPointStrategy": "expand",
+  "plugin": [
+    "typedoc-plugin-katex",
+    "typedoc-plugin-rename-defaults"
+  ],
+  "sort": ["source-order"],
+  "katex": {
+    "options": {
+      "delimiters": [
+        {
+          "left": "$$",
+          "right": "$$",
+          "display": true
+        },
+        {
+          "left": "$",
+          "right": "$",
+          "display": false
+        }
+      ]
+    }
+  }
+}
