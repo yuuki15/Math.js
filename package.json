@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "build": "peggy --format es --output src/parser.mjs src/grammar.pegjs"
+    "build": "tsc"
   },
   "devDependencies": {
-    "peggy": "^3.0.2"
+    "typescript": "^5.8.3"
   }
 }
