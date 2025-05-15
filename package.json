@@ -1,16 +1,8 @@
 {
-  "name": "Math.js",
   "scripts": {
-    "build": "npm run build:dist && npm run build:docs",
-    "build:dist": "tsc",
-    "build:docs": "typedoc src",
-    "test": "ts-node test/*.ts"
+    "build": "peggy --format es --output src/parser.mjs src/grammar.pegjs"
   },
   "devDependencies": {
-    "ts-node": "^10.9.2",
-    "typedoc": "^0.26.11",
-    "typedoc-plugin-katex": "^0.1.2",
-    "typedoc-plugin-rename-defaults": "^0.7.1",
-    "typescript": "^5.6.3"
+    "peggy": "^3.0.2"
   }
 }
