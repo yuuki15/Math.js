@@ -7,12 +7,12 @@ body {
 #input, #output {
   display: inline-block;
   max-width: 400px;
-  width: 90vw;
+  width: 80vw;
 }
 
 #input {
   font-size: 1.5rem;
-  margin-top: 10vh;
+  margin-top: 5vh;
   padding: 1rem;
 }
 
