@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+#input, #output {
+  display: inline-block;
+  max-width: 400px;
+  width: 90vw;
+}
+
+#input {
+  font-size: 1.5rem;
+  margin-top: 10vh;
+  padding: 1rem;
+}
+
+#output {
+  font-family: monospace;
+  text-align: left;
+  white-space: pre;
+}
