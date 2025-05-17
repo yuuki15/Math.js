@@ -1,29 +1,40 @@
-function isNumber(character: string): boolean {
-  return /^[0-9]$/.test(character);
+/**
+ * Checks if a token is a number.
+ */
+function isNumber(token: string): boolean {
+  return /^[0-9]$/.test(token);
 }
 
-function isOperator(character: string): boolean {
-  return character === '+';
+/**
+ * Checks if a token is an operator.
+ */
+function isOperator(token: string): boolean {
+  return token === '+';
 }
 
+/**
+ * Parses an expression.
+ */
 function parse(expression: string): any {
   const stack: any[] = [];
 
+  // Iterates over each character.
   for (let i: number = 0; i < expression.length; i++) {
-    const character: string = expression[i];
+    const token: string = expression[i];
 
-    if (isNumber(character)) {
+    if (isNumber(token)) {
       stack.push({
         type: 'Number',
-        value: Number(character),
+        value: Number(token),
       });
-    } else if (isOperator(character) || character === '(') {
-      stack.push(character);
-    } else if (character === ')') {
+    } else if (isOperator(token) || token === '(') {
+      stack.push(token);
+    } else if (token === ')') {
       parseOperation(stack);
     }
   }
 
+  // Handles the outermost expression that is not wrapped in parentheses.
   if (stack.length > 1) {
     parseOperation(stack, true);
   }
@@ -31,6 +42,9 @@ function parse(expression: string): any {
   return stack.pop();
 }
 
+/**
+ * Parses an operation.
+ */
 function parseOperation(stack: any[], isOutermost: boolean = false): void {
   const right: any = stack.pop();
   const operator: string = stack.pop();
