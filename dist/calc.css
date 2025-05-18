@@ -19,5 +19,5 @@ body {
 #output {
   font-family: monospace;
   text-align: left;
-  white-space: pre;
+  white-space: pre-wrap;
 }
