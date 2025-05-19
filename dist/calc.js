@@ -67,8 +67,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var output = document.getElementById('output');
     calc.addEventListener('submit', function (event) {
         event.preventDefault();
-        var inputValue = input.value;
-        var tokens = tokenize(inputValue);
+        var expr = input.value;
+        var tokens = tokenize(expr);
         var tree = parse(tokens);
         var value = evaluate(tree);
         output.textContent = [

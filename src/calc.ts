@@ -76,9 +76,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   calc.addEventListener('submit', (event) => {
     event.preventDefault();
-    const inputValue: string = input.value;
+    const expr: string = input.value;
 
-    const tokens: any[] = tokenize(inputValue);
+    const tokens: any[] = tokenize(expr);
     const tree: any = parse(tokens);
     const value: number = evaluate(tree);
 
