@@ -1,26 +1,23 @@
 /**
  * Split a string into tokens.
  */
-function tokenize(input: string): any[] {
+function tokenize(expr: string): any[] {
   const tokens: any[] = [];
 
   // Iterate over each character.
-  for (let i: number = 0; i < input.length; i++) {
-    const character: string = input[i];
+  for (let i: number = 0; i < expr.length; i++) {
+    const character: string = expr[i];
 
-    // If a digit is found, collect all following digits to make a number.
+    // If a digit is found, collect digits into a number.
     if (/[0-9]/.test(character)) {
-      let number: string = character;
+      let value: string = character;
 
-      while (/[0-9]/.test(input[i + 1])) {
-        number += input[i + 1];
+      while (/[0-9]/.test(expr[i + 1])) {
+        value += expr[i + 1];
         i++;
       }
 
-      tokens.push({
-        type: 'Number',
-        value: number,
-      });
+      tokens.push({ type: 'Number', value });
     } else if (character === '+') {
       tokens.push({ type: 'Plus' })
     } else if (character === '(') {
@@ -34,22 +31,13 @@ function tokenize(input: string): any[] {
 }
 
 /**
- * Convert tokens into a tree.
+ * Convert an array of tokens into a tree.
  */
 function parse(tokens: any[]): any {
   const stack: any[] = [];
 
   for (let token of tokens) {
-    if (token.type === 'Number') {
-      stack.push({
-        type: 'Number',
-        value: token.value,
-      });
-    } else if (token.type === 'Plus') {
-      stack.push({ type: 'Plus' });
-    } else if (token.type === 'LeftParen') {
-      stack.push({ type: 'LeftParen' });
-    } else if (token.type === 'RightParen') {
+    if (token.type === 'RightParen') {
       const right: any = stack.pop();
       const operator: any = stack.pop();
       const left: any = stack.pop();
@@ -58,12 +46,10 @@ function parse(tokens: any[]): any {
       stack.pop();
 
       if (operator.type === 'Plus') {
-        stack.push({
-          type: 'Add',
-          left,
-          right,
-        });
+        stack.push({ type: 'Add', left, right });
       }
+    } else {
+      stack.push(token);
     }
   }
 
@@ -73,23 +59,14 @@ function parse(tokens: any[]): any {
 /**
  * Convert a tree into a value.
  */
-function evaluateTree(tree: any): number {
+function evaluate(tree: any): number {
   if (tree.type === 'Number') {
     return Number(tree.value);
   }
 
   if (tree.type === 'Add') {
-    return evaluateTree(tree.left) + evaluateTree(tree.right);
+    return evaluate(tree.left) + evaluate(tree.right);
   }
-}
-
-/**
- * Evaluate a string.
- */
-function evaluate(input: string): number {
-  const tokens: any[] = tokenize(input);
-  const tree: any = parse(tokens);
-  return evaluateTree(tree);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -101,11 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
     event.preventDefault();
     const inputValue: string = input.value;
 
-    // output.textContent = String(evaluate(inputValue));
-
     const tokens: any[] = tokenize(inputValue);
     const tree: any = parse(tokens);
-    const value: number = evaluateTree(tree);
+    const value: number = evaluate(tree);
 
     output.textContent = [
       value,
