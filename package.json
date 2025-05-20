@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "peggy --format es -o dist/parser.mjs src/expr.pegjs && tsc"
+    "build": "peggy --format es -o dist/parser.mjs src/expr.peggy && tsc"
   },
   "devDependencies": {
     "peggy": "^5.0.2",
